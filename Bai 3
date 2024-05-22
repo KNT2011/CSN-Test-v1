@@ -1,0 +1,36 @@
+#include <iostream>
+ 
+using namespace std;
+ 
+int main() {
+    int m, d, k, c;
+    cin >> m >> d >> k >> c;
+ 
+    int total_gold = 0;
+ 
+    if (d >= m * k) {
+        cout << 0 << endl;
+        return 0;
+    }
+ 
+    int repair_count = 0;
+    int remaining_durability = d;
+    for (int i = 0; i < m; ++i) {
+        if (remaining_durability < k) {
+            if (c > 0) {
+                // Sửa vũ khí
+                total_gold += c;
+                remaining_durability = d;
+                repair_count++;
+            } else {
+                cout << -1 << endl;
+                return 0;
+            }
+        }
+        remaining_durability -= k;
+    }
+ 
+    cout << total_gold << endl;
+ 
+    return 0;
+}
