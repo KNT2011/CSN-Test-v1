@@ -1,0 +1,60 @@
+1. Lấy tất cả các dữ liệu từ bảng employees:
+SELECT * FROM employees;
+
+
+2. Lấy tên và lương của mỗi nhân viên từ bảng employees:
+
+SELECT first_name, last_name, salary FROM employees;
+
+
+3. Lấy tất cả các nhân viên có lương lớn hơn 5000 từ bảng employees:
+
+SELECT * FROM employees WHERE salary > 5000;
+
+
+4. Lấy tất cả các nhân viên có tên bắt đầu bằng chữ "A" từ bảng employees:
+
+SELECT * FROM employees WHERE first_name LIKE 'A%';
+
+
+5. Lấy danh sách các nhân viên cùng với tên phòng ban của họ từ bảng employees và departments:
+
+SELECT e.*, d.department_name 
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+
+
+6. Lấy số lượng nhân viên trong mỗi phòng ban từ bảng employees:
+
+SELECT d.department_name, COUNT(e.employee_id) AS employee_count 
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+GROUP BY d.department_name;
+
+
+7. Lấy các phòng ban có nhiều hơn 10 nhân viên từ bảng employees:
+
+SELECT d.*
+FROM departments d
+JOIN (
+    SELECT department_id, COUNT(employee_id) AS employee_count
+    FROM employees
+    GROUP BY department_id
+) e ON d.department_id = e.department_id
+WHERE e.employee_count > 10;
+
+
+8. Thêm một nhân viên mới vào bảng employees:
+
+INSERT INTO employees (first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id)
+VALUES ('KhanhNguyen', 'Doe', 'khanhnguyen.@mail.com', '1234567890', '2024-05-25', 'IT_PROG', 5000, NULL, 100, 60);
+
+
+9. Tăng lương cho tất cả các nhân viên trong bảng employees lên 10%:
+
+UPDATE employees
+SET salary = salary * 1.1;
+
+10. Xóa nhân viên có ID là 10 từ bảng employees:
+
+DELETE FROM employees WHERE employee_id = 10;
